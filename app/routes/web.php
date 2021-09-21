@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\About;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Users;
+use App\Http\Controllers\UserWeight;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +21,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', function () {
-    return view('hello');
+// This is a view for the weight page
+Route::get('/weight', function () {
+    return view('weight');
 });
 
-Route::get('/about', function () {
-    return view('about');
-});
+// create a dynimic view with a dynimic input from the user. this will be linked to user page with $name
+// Route::get("/user/{name}", function ($name) {
+//     return view("users",['name'=>$name]);
+// });
 
-Route::get('/contact', function () {
-    return view('contact');
-});
+// create a route for UserWeight
+Route::get("weight", [UserWeight::class,'loadview']);
+
+// using componet 
+Route::view('/', 'welcome');
+Route::view('/about', 'about');
+Route::view('/contact', 'contact');
+
